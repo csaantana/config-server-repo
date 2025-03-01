@@ -1,5 +1,5 @@
 transacoes:
-    events: "sse"
+    events: "transacoes-sse"
     duration: 2
 
 limites:
