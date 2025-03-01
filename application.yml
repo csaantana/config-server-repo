@@ -1,11 +1,6 @@
 transacoes:
-<<<<<<< HEAD
   events: 'coffeeandit-sse1'
   duration: 2
-=======
-    events: "transacoes-sse"
-    duration: 2
->>>>>>> f6a131531df1033c23dc806d1ad77ddc91d21f7f
 
 limites:
   url: http://localhost:8081
