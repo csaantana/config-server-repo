@@ -1,5 +1,5 @@
 transacoes:
-    events: "coffeeandit-sse1"
+    events: "sse"
     duration: 2
 
 limites:
