@@ -12,7 +12,7 @@ transaction:
 spring:
   data:
     redis:
-      host: redis  # Nome do container do Redis
+      host: localhost
       port: 6379
       password:
       timeout: 60000ms
@@ -22,8 +22,14 @@ spring:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
       transaction-id-prefix: transaction
-    bootstrap-server: kafka:9092  # Nome do container do Kafka
-
+    bootstrap-server: localhost:9092
+  cloud:
+    openfeign:
+      client:
+        config:
+          default:
+            connectTimeout: 3000
+            readTimeout: 3000
 resilience4j:
   circuitbreaker:
     instances:
@@ -33,4 +39,19 @@ resilience4j:
         wait-duration-in-open-state: 10s
         sliding-window-type: COUNT_BASED
         sliding-window-size: 10
-      # ... (outras configurações)
+      countBasedCircuitBreaker:
+        sliding-window-type: COUNT_BASED
+        sliding-window-size: 5
+        slow-call-rate-threshold: 65
+        slow-call-duration-threshold: 2s
+      timeBasedCircuitBreaker:
+        sliding-window-type: TIME_BASED
+        minimum-number-of-calls: 3
+        failure-rate-threshold: 70
+        wait-duration-in-open-state: 10s
+        writable-stack-trace-enabled: false
+  retry:
+    instances:
+      limiteRetry:
+        max-attempts: 3
+        wait-duration: 500ms
