@@ -1,0 +1,36 @@
+# transaction-bff-docker.yml
+transacoes:
+  events: 'coffeeandit-sse1'
+  duration: 2
+
+limites:
+  url: http://limites-svc:8081  # Nome do container do serviço de limites
+
+transaction:
+  url: http://transaction-svc:8082  # Nome do container do serviço de transação
+
+spring:
+  data:
+    redis:
+      host: redis  # Nome do container do Redis
+      port: 6379
+      password:
+      timeout: 60000ms
+  kafka:
+    producer:
+      client-id: transaction
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      transaction-id-prefix: transaction
+    bootstrap-server: kafka:9092  # Nome do container do Kafka
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      limiteCircuitBreaker:
+        failure-rate-threshold: 60
+        minimum-number-of-calls: 5
+        wait-duration-in-open-state: 10s
+        sliding-window-type: COUNT_BASED
+        sliding-window-size: 10
+      # ... (outras configurações)
