@@ -12,7 +12,7 @@ transaction:
 spring:
   data:
     redis:
-      host: localhost
+      host: redis-container
       port: 6379
       password:
       timeout: 60000ms
@@ -22,7 +22,7 @@ spring:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
       transaction-id-prefix: transaction
-    bootstrap-server: localhost:9092
+    bootstrap-server: http://transaction-bff-kafka-1:9092
   cloud:
     openfeign:
       client:
