@@ -12,7 +12,7 @@ transaction:
 spring:
   data:
     redis:
-      host: redis-container
+      host: redis-service
       port: 6379
       password:
       timeout: 60000ms
