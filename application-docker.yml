@@ -22,7 +22,7 @@ spring:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
       transaction-id-prefix: transaction
-    bootstrap-server: http://transaction-bff-kafka-1:9092
+    bootstrap-server: kafka:9092
   cloud:
     openfeign:
       client:
